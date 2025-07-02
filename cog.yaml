@@ -1,0 +1,16 @@
+cog_version: "0.3"  # Use latest Cog version
+build:
+  gpu: true                    # Enable GPU acceleration:contentReference[oaicite:1]{index=1}
+  python_version: "3.10"       # Use a compatible Python version
+  python_packages:            # Required Python packages
+    - torch==2.1.0            # PyTorch with CUDA support
+    - torchvision==0.16.0
+    - torchaudio==2.1.0
+    - torchsde==0.2.5
+    - numpy==1.25.0
+    - pillow                  # For image processing if needed
+    - requests                # For HTTP requests (download models, call API)
+    - huggingface-hub         # (Optional) for Huggingface caching, not explicitly used above
+    - cog==0.3.0              # Cog toolkit (provided in environment)
+    - ComfyUI@git+https://github.com/comfyanonymous/ComfyUI.git
+predict: "predict.py:Predictor"  # Entry-point for predictions:contentReference[oaicite:2]{index=2}
