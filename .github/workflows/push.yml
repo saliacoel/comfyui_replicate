@@ -4,20 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       model_slug:
-        description: "Exact slug, e.g. saliacoel/comfyui-replicate-workflow"
+        description: "saliacoel/comfyui-replicate-workflow"
         required: true
 
 jobs:
   push:
     runs-on: ubuntu-latest
     steps:
+      # 1. Check out your code
       - uses: actions/checkout@v4
 
+      # 2. Install Docker + Cog on the runner
       - uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
 
+      # 3. Log in and push the model image
       - name: Build & push
         run: |
-          cog login --token $REPLICATE_CLI_AUTH_TOKEN
+          echo "${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}" | cog login --token-stdin
           cog push r8.im/${{ github.event.inputs.model_slug }}
