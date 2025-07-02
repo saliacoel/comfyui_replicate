@@ -1,0 +1,179 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 42,
+      "steps": 11,
+      "cfg": 5.3,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "31",
+        0
+      ],
+      "positive": [
+        "36",
+        0
+      ],
+      "negative": [
+        "36",
+        1
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "(embedding:lazyneg_v3:1.2), (embedding:ng_deepnegative_v1_75t:1.2), asymmetrical eyes, low quality, worst quality, jpeg artifacts, watermark, text, logo, signature, bad hands, bad feet, multiple views, sketch, monochrome, extra digits, mutated hands, male, masculine, boy, guy, male, fat, overweight. monster, non-human, non-human, asymmetrical eyes, detailed asymmetrical eyes, detailed asymmetrical eyes, detailed asymmetrical eyes, 6 fingers fist on hand,",
+      "clip": [
+        "31",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "31",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "20": {
+    "inputs": {
+      "image": "https://huggingface.co/saliacoel/comfy_weights/resolve/main/image.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "24": {
+    "inputs": {
+      "text": "1-girl-adult-alone-human-female, white-background,\nhairstyle-red-short-curls whimsical-drawn-green-eyecolor-small-round looking-at-viewer-green-eyes-whimsical-drawn,\ngrey-hoodie,\nblack-skirt,\nLow angle view perspective, \nperfect-black-skirt-curves, perfect thighs covered by black skirt, pov before her, \nlow angle, from below, worm-eye view, extremely low angle, foreshortened perspective, from_below, below, from below,\npretty and cute beautiful face, \nsimple drawn symmetrical eyes cartoon whimsical eye shading looking degrading gaze at you,\n(Closed slight smile mouth:1.0),\nvery awa, masterpiece, best quality, highres, absurdres, newest, year 2024. white-background-character-cg-asset.",
+      "clip": [
+        "31",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "31": {
+    "inputs": {
+      "ckpt_name": "https://huggingface.co/saliacoel/comfy_weights/resolve/main/SaliaHighlady.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "34": {
+    "inputs": {
+      "strength": 2.0000000000000004,
+      "start_percent": 0,
+      "end_percent": 0.17000000000000004,
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "control_net": [
+        "35",
+        0
+      ],
+      "image": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "35": {
+    "inputs": {
+      "control_net_name": "https://huggingface.co/saliacoel/comfy_weights/resolve/main/diffusion_pytorch_model_promax.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "36": {
+    "inputs": {
+      "strength": 0.9100000000000001,
+      "start_percent": 0,
+      "end_percent": 0.9100000000000003,
+      "positive": [
+        "34",
+        0
+      ],
+      "negative": [
+        "34",
+        1
+      ],
+      "control_net": [
+        "35",
+        0
+      ],
+      "image": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  }
+}
