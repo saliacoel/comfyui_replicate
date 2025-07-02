@@ -1,6 +1,7 @@
 # cog.yaml  –  minimal environment for a ComfyUI Stable-Diffusion workflow
 build:
   gpu: true                 # Request a GPU runner (needed for SD)
+  cuda: "12.1"
   python_version: "3.10"
   python_packages:
     # CUDA 12.1 wheels – adjust if Replicate’s base image changes
