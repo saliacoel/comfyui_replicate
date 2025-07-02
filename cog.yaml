@@ -1,16 +1,15 @@
-cog_version: "0.3"  # Use latest Cog version
+# cog.yaml  –  minimal environment for a ComfyUI Stable-Diffusion workflow
 build:
-  gpu: true                    # Enable GPU acceleration:contentReference[oaicite:1]{index=1}
-  python_version: "3.10"       # Use a compatible Python version
-  python_packages:            # Required Python packages
-    - torch==2.1.0            # PyTorch with CUDA support
-    - torchvision==0.16.0
-    - torchaudio==2.1.0
-    - torchsde==0.2.5
-    - numpy==1.25.0
-    - pillow                  # For image processing if needed
-    - requests                # For HTTP requests (download models, call API)
-    - huggingface-hub         # (Optional) for Huggingface caching, not explicitly used above
-    - cog==0.3.0              # Cog toolkit (provided in environment)
-    - ComfyUI@git+https://github.com/comfyanonymous/ComfyUI.git
-predict: "predict.py:Predictor"  # Entry-point for predictions:contentReference[oaicite:2]{index=2}
+  gpu: true                 # Request a GPU runner (needed for SD)
+  python_version: "3.10"
+  python_packages:
+    # CUDA 12.1 wheels – adjust if Replicate’s base image changes
+    - torch==2.1.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+    - torchvision==0.16.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+    - torchaudio==2.1.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+    # ComfyUI (pulls all its Python deps)
+    - git+https://github.com/comfyanonymous/ComfyUI.git
+    # Misc utilities
+    - pillow
+    - requests
+predict: "predict.py:Predictor"   # points to the class in your predict.py
