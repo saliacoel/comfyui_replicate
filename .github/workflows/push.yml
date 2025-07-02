@@ -1,0 +1,23 @@
+name: Push to Replicate
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_slug:
+        description: "Exact slug, e.g. saliacoel/comfyui-replicate-workflow"
+        required: true
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: replicate/setup-cog@v2
+        with:
+          token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
+
+      - name: Build & push
+        run: |
+          cog login --token $REPLICATE_CLI_AUTH_TOKEN
+          cog push r8.im/${{ github.event.inputs.model_slug }}
